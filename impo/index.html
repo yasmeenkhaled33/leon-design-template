@@ -1,0 +1,82 @@
+let lis=document.querySelectorAll("ul li");
+let div=document.querySelector("div");
+
+if(window.localStorage.getItem("color")) {
+    div.style.backgroundColor=window.localStorage.getItem("color");
+    lis.forEach((li)=> {
+        li.classList.remove("active");
+    })
+    document.querySelector(`[data-color="${window.localStorage.getItem("color")}"]`).classList.add("active")
+}
+
+lis.forEach((li)=>{
+    li.onclick=(li)=> {
+        lis.forEach((li)=> {
+            li.classList.remove("active");
+        })
+        li.currentTarget.classList.add("active");
+        div.style.backgroundColor=li.currentTarget.dataset.color;
+        window.localStorage.setItem("color", li.currentTarget.dataset.color);
+    }
+})
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="loza.css">
+    <title>Document</title>
+    <style>
+        div {
+            width: 400px;
+            height: 200px;
+            background-color: black;
+            margin: 20px auto;
+        }
+        ul {
+            display: flex;
+            padding: 20px;
+            margin: 20px auto;
+            background-color: #eee;
+            width: fit-content;
+        }
+        li {
+            width: 20px;
+            height: 20px;
+            list-style: none;
+            margin-right: 20px;
+            opacity: 0.4;
+        }
+        .one {
+            background-color: red;
+        }
+        .two {
+            background-color: green;
+        }
+        .three {
+            background-color: black;
+        }
+        .four {
+            background-color: blue;
+        }
+        .active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>   
+    <ul>
+        <li class="one active" data-color="red"></li>
+        <li class="two" data-color="green"></li>
+        <li class="three" data-color="black"></li>
+        <li class="four" data-color="blue"></li>
+    </ul>
+    <div class="divv"></div>
+    <script src="main.js"></script>
+</body> 
+
